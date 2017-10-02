@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <title><?php echo $cedente; ?></title>
+        <style type="text/css">
+            /* Embed the CSS content here */
+            <?php include $resource_path . '/css/styles.css' ?>
+            <?php include $resource_path . '/css/demonstrativo-boleto.css' ?>
+        </style>
+    </head>
+    <body>
+
+        <div style="width: 666px">
+            <table class="demonstrativo">
+                <tbody>
+                    <tr>
+                        <td>
+                            <img width="108" src="<?php echo $logotipo; ?>">
+                        </td>
+                        <td>
+                            <div class="center bold"><?= $empresa_nome ?></div>
+                            <div class="center"><?= $empresa_endereco ?></div>
+                            <div class="center"><?= "$empresa_cep $empresa_cidade_estado $empresa_fone" ?></div>
+                        </td>
+                        <td>
+                            <div class="center">Recibo do Pagador</div>
+                            <div class="center">CNPJ <?= $empresa_cnpj ?></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <table class="border" style="width: 100%">
+                                <tr>
+                                    <td class="padding-5">
+                                        <div>
+                                            <span class="title">Condomínio: </span>
+                                            <span class="text bold"><?= $condominio ?></span>
+                                        </div>
+                                        <div>
+                                            <span class="title">Endereço: </span>
+                                            <span class="text bold"><?= "$sacado_endereco1 $sacado_endereco2" ?></span>
+                                        </div>
+                                        <div>
+                                            <span class="title">Condômino: </span>
+                                            <span class="text bold"><?= $sacado ?></span>
+                                        </div>
+                                        <div>
+                                            <span style="width: 50%; float: left;">
+                                                <span class="title">Unidade: </span>
+                                                <span class="text bold"><?= $unidade ?></span>
+                                            </span>
+                                            <span style="width: 49%; float: left;">
+                                                <span class="title">Referência: </span>
+                                                <span class="text bold"><?= $competencia ?></span>
+                                            </span>
+                                        </div>
+                                    </td>
+                                    <td class="border-left padding-5">
+                                        <div class="bold center font-9">Vencimento</div>
+                                        <div class="bold center font-12 border-bottom"><?= $data_vencimento ?></div>
+                                        <div class="bold center font-9 margin-top-2">Total</div>
+                                        <div class="bold center font-12">R$ <?= $valor_documento ?></div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <table class="border" style="width: 100%">
+                                <tr>
+                                    <td class="padding-5">
+                                        <div>
+                                            <span style="width: 50%; float: left;">
+                                                <span class="title">Beneficiário: </span>
+                                                <span class="text bold"><?= $cedente ?></span>
+                                            </span>
+
+                                            <span style="width: 49%; float: left;">
+                                                <span class="title">CPF/CNPJ do Beneficiário: </span>
+                                                <span class="text bold"><?php echo $cedente_cpf_cnpj ?></span>
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <span class="title">Endereço do Beneficiário: </span>
+                                            <span class="text bold"><?php echo $cedente_endereco1 ?> | <?php echo $cedente_endereco2 ?></span>
+                                        </div>
+                                        <div>
+                                            <span style="width: 35%; float: left;">
+                                                <span class="title">Agência/Cód. do Beneficiário: </span>
+                                                <span class="text bold"><?php echo $agencia_codigo_cedente ?></span>
+                                            </span>
+                                            <span style="width: 33%; float: left;">
+                                                <span class="title">Nosso Nr.: </span>
+                                                <span class="text bold"><?php echo $nosso_numero ?></span>
+                                            </span>
+                                            <span style="width: 30%; float: left;">
+                                                <span class="title">Nr. Documento: </span>
+                                                <span class="text bold"><?php echo $numero_documento ?></span>
+                                            </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <table class="padding-5 border" style="width: 100%">
+                                <tr>
+                                    <td>
+                                        <h4 class="center margin-bottom-2">Demonstrativo</h4>
+                                        <div style="height: 300px" id="descricoes">
+                                            <div style="width: 50%; float: left">
+
+                                                <?php if ($demonstrativo): ?>
+                                                    <?php $i = 0; ?>
+                                                    <?php foreach ($demonstrativo as $item): ?>
+                                                        <?php if ($i == 27) { ?>
+                                                            <?= '</div><div style="width: 50%; float: right">' ?>
+                                                        <?php } ?>
+                                                        <div class="row">
+                                                            <span class="descricao"><?= $item['descricao'] ?></span>
+                                                            <span class="text text-right"><?= $item['valor'] ?></span>
+                                                        </div>
+                                                        <?php $i++; ?>
+                                                    <?php endforeach; ?>
+                                                <?php endif; ?>
+
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <div class="linha-pontilhada">Corte na linha pontilhada</div>
+            <br>
+            <!-- Ficha de compensação -->
+            <?php include('partials/ficha-de-compensacao.phtml') ?>
+        </div>
+    </body>
+</html>

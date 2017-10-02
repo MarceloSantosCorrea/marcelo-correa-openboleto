@@ -1,0 +1,88 @@
+
+.demonstrativo {
+    font: 8px Arial;
+    width: 666px;
+    border: 1px solid #000000;
+    padding: 3px;
+    text-transform: uppercase;
+}
+
+.padding-5 {
+    padding: 1px;
+}
+
+.margin-top-2{
+    margin-top: 5px;
+}
+
+.margin-bottom-2{
+    margin-bottom: 2px;
+}
+
+.border {
+    border: 1px solid #000000;
+}
+
+.border-left {
+    border-left: 1px solid #000000;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #000000;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.center {
+    text-align: center;
+}
+
+#descricoes .text-right {
+    float: right;
+    text-align: right;
+}
+
+.font-9 {
+    font: 9px Arial;
+}
+
+.font-12 {
+    font: 12px Arial;
+    font-weight: bold;
+}
+
+h4 {
+    margin: 0;
+    padding: 0
+}
+
+.demonstrativo td span {
+    margin: 1px;
+}
+
+table span.title {
+    width: 150px;
+}
+
+#descricoes {
+    float: left;
+    font: 7.5px Arial;
+}
+
+#descricoes .row {
+    float: left;
+    width: 310px;
+}
+
+#descricoes .descricao {
+    width: 260px;
+    float: left;
+}
+
+#descricoes .text {
+    float: left;
+    width: 40px;
+    text-align: right;
+}
