@@ -62,12 +62,14 @@ class Itau extends BoletoAbstract
      * Define as carteiras disponíveis para este banco
      * @var array
      */
-    protected $carteiras = array(
+    protected $carteiras = [
         '148', '149', '153', '108', '180', '121', '150', '109', '191', '116', '117', '119',
         '134', '135', '136', '104', '188', '147', '112', '115', '177', '172', '107', '204',
         '205', '206', '173', '196', '103', '102', '174', '198', '167', '202', '203', '175',
         '157',
-    );
+    ];
+
+    protected $layout = 'itau.phtml';
 
     /**
      * Campo obrigatório para emissão de boletos com carteira 198 fornecido pelo Banco com 5 dígitos
@@ -97,6 +99,7 @@ class Itau extends BoletoAbstract
     public function setCodigoCliente($codigoCliente)
     {
         $this->codigoCliente = $codigoCliente;
+
         return $this;
     }
 
@@ -137,12 +140,12 @@ class Itau extends BoletoAbstract
         }
 
         $sequencial = self::zeroFill($this->getSequencial(), 8);
-        $carteira = self::zeroFill($this->getCarteira(), 3);
-        $agencia = self::zeroFill($this->getAgencia(), 4);
-        $conta = self::zeroFill($this->getConta(), 5);
+        $carteira   = self::zeroFill($this->getCarteira(), 3);
+        $agencia    = self::zeroFill($this->getAgencia(), 4);
+        $conta      = self::zeroFill($this->getConta(), 5);
 
         // Carteira 198 - (Nosso Número com 15 posições) - Anexo 5 do manual
-        if (in_array($this->getCarteira(), array('107', '122', '142', '143', '196', '198'))) {
+        if (in_array($this->getCarteira(), ['107', '122', '142', '143', '196', '198'])) {
             $codigo = $carteira . $sequencial .
                 self::zeroFill($this->getNumeroDocumento(), 7) .
                 self::zeroFill($this->getCodigoCliente(), 5);
@@ -154,7 +157,7 @@ class Itau extends BoletoAbstract
         }
 
         // Geração do DAC - Anexo 4 do manual
-        if (!in_array($this->getCarteira(), array('126', '131', '146', '150', '168'))) {
+        if (!in_array($this->getCarteira(), ['126', '131', '146', '150', '168'])) {
             // Define o DV da carteira para a view
             $this->carteiraDv = $dvAgContaCarteira = static::modulo10($agencia . $conta . $carteira . $sequencial);
         } else {
@@ -175,8 +178,8 @@ class Itau extends BoletoAbstract
      */
     public function getViewVars()
     {
-        return array(
+        return [
             'carteira' => null, // Campo não utilizado pelo Itaú
-        );
+        ];
     }
 }
